@@ -11,4 +11,8 @@ class Node
     @left = left
     @right = right
   end
+
+  def to_s
+    "Data: #{data}"
+  end
 end

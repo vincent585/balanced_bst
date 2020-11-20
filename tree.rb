@@ -37,11 +37,9 @@ class Tree
     else
       if node.left.nil?
         temp = node.right
-        node = nil
         return temp
       elsif node.right.nil?
         temp = node.left
-        node = nil
         return temp
       end
       temp = min_value_node(node.right)
@@ -55,6 +53,12 @@ class Tree
     current = node
     current = current.left while current.left
     current
+  end
+
+  def find(value, node = @root)
+    return node if node.nil? || node.data == value
+
+    node.data < value ? find(value, node.right) : find(value, node.left)
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
@@ -76,3 +80,5 @@ bst.delete(0)
 bst.pretty_print
 bst.delete(4)
 bst.pretty_print
+p bst.find(7).to_s
+p bst.find(324).to_s
