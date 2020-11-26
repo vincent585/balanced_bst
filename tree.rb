@@ -61,6 +61,21 @@ class Tree
     node.data < value ? find(value, node.right) : find(value, node.left)
   end
 
+  def level_order(node = @root)
+    return if node.nil?
+
+    result = []
+    discovered_nodes = []
+    discovered_nodes.push(node)
+    until discovered_nodes.empty?
+      current = discovered_nodes.shift
+      result << current.data
+      discovered_nodes << current.left unless current.left.nil?
+      discovered_nodes << current.right unless current.right.nil?
+    end
+    result
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
@@ -82,3 +97,4 @@ bst.delete(4)
 bst.pretty_print
 p bst.find(7).to_s
 p bst.find(324).to_s
+p bst.level_order
