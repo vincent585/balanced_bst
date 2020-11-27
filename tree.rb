@@ -76,6 +76,29 @@ class Tree
     result
   end
 
+  def level_order_recursive(node = @root)
+    return if node.nil?
+
+    # TODO
+  end
+
+  def preorder(node = @root, result = [])
+    return if node.nil?
+
+    result << node.data
+    preorder(node.left, result)
+    preorder(node.right, result)
+    result
+  end
+
+  def inorder
+
+  end
+
+  def postorder
+
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
@@ -98,3 +121,4 @@ bst.pretty_print
 p bst.find(7).to_s
 p bst.find(324).to_s
 p bst.level_order
+p bst.preorder
