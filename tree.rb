@@ -91,12 +91,22 @@ class Tree
     result
   end
 
-  def inorder
+  def inorder(node = @root, result = [])
+    return if node.nil?
 
+    inorder(node.left, result)
+    result << node.data
+    inorder(node.right, result)
+    result
   end
 
-  def postorder
+  def postorder(node = @root, result = [])
+    return if node.nil?
 
+    postorder(node.left, result)
+    postorder(node.right, result)
+    result << node.data
+    result
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
@@ -122,3 +132,5 @@ p bst.find(7).to_s
 p bst.find(324).to_s
 p bst.level_order
 p bst.preorder
+p bst.inorder
+p bst.postorder
