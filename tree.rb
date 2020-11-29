@@ -133,6 +133,17 @@ class Tree
     find_depth(node, current_depth + 1, root)
   end
 
+  def balanced?(node = @root)
+    return true if node.nil?
+
+    left_height = find_height(node.left)
+    right_height = find_height(node.right)
+
+    return true if (left_height - right_height).abs <= 1 && balanced?(node.left) && balanced?(node.right)
+
+    false
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
@@ -142,21 +153,10 @@ end
 
 bst = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
 bst.pretty_print
-bst.insert(10)
-bst.pretty_print
-bst.insert(0)
-bst.pretty_print
-bst.insert(100)
-bst.pretty_print
-bst.delete(0)
-bst.pretty_print
-bst.delete(4)
-bst.pretty_print
 p bst.find(7).to_s
 p bst.find(324).to_s
 p bst.level_order
 p bst.preorder
 p bst.inorder
 p bst.postorder
-p bst.depth(10)
-p bst.depth(5)
+p bst.balanced?
