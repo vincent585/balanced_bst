@@ -121,6 +121,18 @@ class Tree
     [max_left, max_right].max + 1
   end
 
+  def depth(value)
+    node = find(value)
+    find_depth(node)
+  end
+
+  def find_depth(node, current_depth = 0, root = @root)
+    return current_depth if node.data == root.data
+
+    root = node.data < root.data ? root.left : root.right
+    find_depth(node, current_depth + 1, root)
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
@@ -146,8 +158,5 @@ p bst.level_order
 p bst.preorder
 p bst.inorder
 p bst.postorder
-p bst.height(9)
-p bst.height(3)
-p bst.height(5)
-p bst.height(1)
-p bst.height(8)
+p bst.depth(10)
+p bst.depth(5)
