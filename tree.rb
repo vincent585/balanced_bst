@@ -61,10 +61,9 @@ class Tree
     node.data < value ? find(value, node.right) : find(value, node.left)
   end
 
-  def level_order(node = @root)
+  def level_order(node = @root, result = [])
     return if node.nil?
 
-    result = []
     discovered_nodes = []
     discovered_nodes.push(node)
     until discovered_nodes.empty?
@@ -109,6 +108,19 @@ class Tree
     result
   end
 
+  def height(value)
+    node = find(value)
+    find_height(node)
+  end
+
+  def find_height(node)
+    return -1 if node.nil?
+
+    max_left = find_height(node.left)
+    max_right = find_height(node.right)
+    [max_left, max_right].max + 1
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
@@ -134,3 +146,8 @@ p bst.level_order
 p bst.preorder
 p bst.inorder
 p bst.postorder
+p bst.height(9)
+p bst.height(3)
+p bst.height(5)
+p bst.height(1)
+p bst.height(8)
