@@ -155,22 +155,3 @@ class Tree
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 end
-
-bst = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
-bst.pretty_print
-p bst.find(7).to_s
-p bst.find(324).to_s
-p bst.level_order
-p bst.preorder
-p bst.inorder
-p bst.postorder
-p bst.balanced?
-bst.insert(400)
-bst.insert(500)
-bst.insert(600)
-bst.insert(1000)
-bst.pretty_print
-p bst.balanced?
-bst.rebalance
-bst.pretty_print
-p bst.balanced?
